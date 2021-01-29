@@ -21,8 +21,8 @@
                         <span th:text="${livro.nomeLivro}"/>
                     </h4>
                 </a>
-                <a th:href="/livro/editar"><span>Editar</span></a>
-                <a th:href="/livro/excluir"><span>Excluir</span></a>
+                <a th:href="${(#mvc.url('LC#getEditar').arg(0, livro.id)).build()}"><span>Editar</span></a>
+                <a th:href="${(#mvc.url('LC#getDeleteLivro').arg(0, livro.id)).build()}"><span>Excluir</span></a>
             </div>
         </div>
     </body>

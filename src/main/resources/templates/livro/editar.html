@@ -8,7 +8,7 @@
     <div th:replace="~{base :: titulo('Meus Livros')}"></div>
 </div>
 <div class="card mt-3">
-    <form class="card-body" th:object="${livro}" th:action="@{/livro/${livro.id}/editar">
+    <form class="card-body" th:object="${livro}" th:action="@{/livro/{id}/editar}" method="post">
         <div class="form-group">
             <label>Livro</label>
             <input th:field="*{nomeLivro}" th:errorClass="is-invalid" class="form-control" placeholder="Nome do Livro"/>

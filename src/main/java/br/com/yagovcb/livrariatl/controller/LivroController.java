@@ -45,13 +45,6 @@ public class LivroController {
     }
 
     @Secured({"ROLE_ADM","ROLE_USUARIO"})
-    @PostMapping("/{id}/editar")
-    public ModelAndView getEditar(@PathVariable("livro.id") long id, Model mav) {
-        Livro registrado = livroService.editar(id);
-        return new ModelAndView("usuario/home", "requisicaoNovoLivro", registrado);
-    }
-
-    @Secured({"ROLE_ADM","ROLE_USUARIO"})
     @GetMapping("/{id}")
     public ModelAndView getDetalhamentoLivro (@PathVariable("id") long id){
         Livro livro = livroService.buscaLivro(id);
@@ -59,8 +52,29 @@ public class LivroController {
     }
 
     @Secured({"ROLE_ADM","ROLE_USUARIO"})
+    @PostMapping("/{id:[0-9]+}/editar")
+    public ModelAndView Editar(@PathVariable("id") long id) {
+        Livro registrado = livroService.editar(id);
+        return new ModelAndView("usuario/home", "requisicaoNovoLivro", registrado);
+    }
+
+    @Secured({"ROLE_ADM","ROLE_USUARIO"})
+    @GetMapping("/{id}/editar")
+    public ModelAndView getEditar (@PathVariable("id") long id){
+        Livro livro = livroService.buscaLivro(id);
+        return new ModelAndView("livro/editar", "livro", livro);
+    }
+
+    @Secured({"ROLE_ADM","ROLE_USUARIO"})
     @GetMapping("/{id}/delete")
-    public ModelAndView getDeleteLivro (@PathVariable("livro.id") long id, Model model, Principal principal) throws Exception{
+    public ModelAndView getDeleteLivro (@PathVariable("id") long id){
+        Livro livro = livroService.buscaLivro(id);
+        return new ModelAndView("livro/excluir", "livro", livro);
+    }
+
+    @Secured({"ROLE_ADM","ROLE_USUARIO"})
+    @PostMapping("/{id:[0-9]+}/delete")
+    public ModelAndView DeleteLivro (@PathVariable("id") long id, Model model, Principal principal) throws Exception{
         List<Livro> livros = livroRepository.findAllByUsuario(principal.getName());
         try {
             livroService.delete(id);
