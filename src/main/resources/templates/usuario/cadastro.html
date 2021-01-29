@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" >
+    <head th:replace="~{base :: head}"></head>
+    <body>
+        <div th:replace="~{base :: logo}"></div>
+
+        <div class="container">
+            <div th:replace="~{base :: titulo('Cadastro de Usuario')}"></div>
+        </div>
+        <div class="card mb-3">
+            <form th:object="${requisicaoNovoUsuario}" th:action="@{/usuario/cadastro}" class="card-body" method="post" style="padding-left: 10rem;padding-top: 2rem; padding-right:10rem; padding-bottom: 2rem">
+                <div class="form-group">
+                    <label >Usuário</label>
+                    <input th:field="*{usrName}" th:errorClass="is-invalid" class="form-control" placeholder="Insira seu usuário"/>
+                    <div class="invalid-feedback" th:errors="*{usrName}">
+                        Erros do nome do Usuario
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Senha</label>
+                    <input type="password" th:field="*{password}" th:errorClass="is-invalid" class="form-control" placeholder="Insira sua senha"/>
+                    <div class="invalid-feedback" th:errors="*{password}">
+                        Erros na senha
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirme a Senha</label>
+                    <input type="password" th:field="*{passwordRetype}" th:errorClass="is-invalid" class="form-control" placeholder="Repita sua senha"/>
+                    <div class="invalid-feedback" th:errors="*{passwordRetype}">
+                        Erros na senha
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+    <head th:replace="~{base :: head}"></head>
+    <body>
+        <div th:replace="~{base :: logo}"></div>
+
+        <div class="container">
+            <div th:replace="~{base :: titulo('Essa é nossa biblioteca de Livros')}"></div>
+        </div>
+
+        <div class="card mb-3" th:each="livro : ${livros}">
+            <div class="card-body">
+                <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
+                    <span th:text="${livro.autorLivro}"/>
+                    <span th:text="${livro.dataCadastro}"/>
+                </p>
+                <a th:href="${(#mvc.url('LC#getDetalhamentoLivro').arg(0, livro.id)).build()}">
+                    <h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;">
+                        <span th:text="${livro.nomeLivro}"/>
+                    </h4>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
